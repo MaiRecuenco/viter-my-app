@@ -1,5 +1,5 @@
 import React from "react";
-import CardService from "../../../partials/CardService";
+import CardService from "../../../../partials/CardService";
 
 const Services = () => {
   return (
