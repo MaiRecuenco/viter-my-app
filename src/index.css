@@ -1,0 +1,136 @@
+@font-face {
+  font-family: "Poppins";
+  src: url(/fonts/Poppins-Regular.woff2) format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url(/fonts/Poppins-Medium.woff2) format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url(/fonts/Poppins-SemiBold.woff2) format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url(/fonts/Poppins-Bold.woff2) format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth scroll-p-16;
+  }
+  body {
+    @apply overflow-x-hidden font-poppins text-black/80 text-base;
+  }
+  .container {
+    @apply max-w-7xl w-full mx-auto px-4;
+  }
+  h1 {
+    @apply text-[clamp(3rem,_6vw,_3rem)] font-bold;
+  }
+  h2 {
+    @apply text-[clamp(1.5rem,_5vw,_2.5rem)] font-bold;
+  }
+  h3 {
+    @apply text-[clamp(1.25rem,_4vw,_2rem)] font-bold;
+  }
+  h4 {
+    @apply text-[clamp(1rem,_3vw,_1.75rem)] font-bold;
+  }
+  h5 {
+    @apply text-xl font-semibold;
+  }
+  h6 {
+    @apply text-lg font-semibold;
+  }
+}
+@layer components {
+  .headerNav ul li:hover {
+    @apply text-blue-500;
+  }
+  .headerNav ul.open {
+    @apply opacity-100 h-fit shadow-md max-w-7xl w-full top-[5.5rem] px-4 pb-3;
+  }
+  .toggleMenu {
+    @apply flex flex-col gap-1 md:hidden;
+  }
+  .toggleMenu span {
+    @apply bg-black/80 inline-block content-["*"] w-5 h-[2px] rounded-xl;
+  }
+  .toggleMenu.open span:first-child {
+    @apply rotate-45 translate-y-2;
+  }
+  .toggleMenu.open span:nth-child(2) {
+    @apply opacity-0;
+  }
+  .toggleMenu.open span:last-child {
+    @apply -rotate-45 -translate-y-1;
+  }
+  .title {
+    @apply mt-2 mb-4 leading-10 md:mb-6;
+  }
+  .btn {
+    @apply px-6 py-3 rounded-lg font-medium text-center w-full lg:w-auto;
+  }
+  .btn--blue {
+    @apply bg-blue-600 text-white hover:bg-blue-700;
+  }
+  .btn--gray {
+    @apply border border-gray-700 hover:bg-gray-100;
+  }
+  .card {
+    @apply bg-white p-8 rounded-xl shadow-md hover:shadow-lg;
+  }
+  .card img {
+    @apply size-16 mb-6;
+  }
+  .card h3 {
+    @apply font-semibold mb-3;
+  }
+  .card p {
+    @apply mb-5;
+  }
+  .card a {
+    @apply text-blue-600 font-medium hover:text-blue-700;
+  }
+  .testimonialsItem {
+    @apply bg-white py-10 px-12 rounded-xl shadow-md text-center mb-4;
+  }
+  .testimonialsItem img {
+    @apply size-20 object-cover rounded-full mx-auto mb-4;
+  }
+  .testimonialsItem p {
+    @apply italic mb-4;
+  }
+  .tns-outer {
+    @apply overflow-hidden max-w-6xl;
+  }
+  .tns-outer > button {
+    @apply hidden;
+  }
+  .tns-nav {
+    @apply flex justify-center gap-2 mt-7;
+  }
+  .tns-nav button {
+    @apply bg-black/40 rounded-full size-3;
+  }
+  .tns-nav button.tns-nav-active {
+    @apply bg-blue-500;
+  }
+  form input,
+  form textarea {
+    @apply w-full px-4 py-3 border border-black/30 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-2 focus:outline-blue-500 mt-3 mb-6;
+  }
+}
