@@ -28,56 +28,56 @@ const DashboardSideNav = ({ isSideNavOpen, setIsSideNavOpen }) => {
         </span>
         <ul className="py-5">
           <li className="mb-3">
-            <di className="py-1 px-5 flex items-center justify-between gap-2 hover:bg-primary transition-all ease-in-out duration-200 cursor-pointer">
+            <div className="py-1 px-5 flex items-center justify-between gap-2 hover:bg-primary transition-all ease-in-out duration-200 cursor-pointer">
               <a href="#header" className="flex items-center gap-2 w-full">
                 Header
               </a>
-            </di>
+            </div>
           </li>
           <li className="mb-3">
-            <di className="py-1 px-5 flex items-center justify-between gap-2 hover:bg-primary transition-all ease-in-out duration-200 cursor-pointer">
+            <div className="py-1 px-5 flex items-center justify-between gap-2 hover:bg-primary transition-all ease-in-out duration-200 cursor-pointer">
               <a href="#banner" className="flex items-center gap-2 w-full">
                 Banner
               </a>
-            </di>
+            </div>
           </li>
           <li className="mb-3">
-            <di className="py-1 px-5 flex items-center justify-between gap-2 hover:bg-primary transition-all ease-in-out duration-200 cursor-pointer">
+            <div className="py-1 px-5 flex items-center justify-between gap-2 hover:bg-primary transition-all ease-in-out duration-200 cursor-pointer">
               <a href="#services" className="flex items-center gap-2 w-full">
                 Services
               </a>
-            </di>
+            </div>
           </li>
           <li className="mb-3">
-            <di className="py-1 px-5 flex items-center justify-between gap-2 hover:bg-primary transition-all ease-in-out duration-200 cursor-pointer">
+            <div className="py-1 px-5 flex items-center justify-between gap-2 hover:bg-primary transition-all ease-in-out duration-200 cursor-pointer">
               <a href="#about" className="flex items-center gap-2 w-full">
                 About
               </a>
-            </di>
+            </div>
           </li>
           <li className="mb-3">
-            <di className="py-1 px-5 flex items-center justify-between gap-2 hover:bg-primary transition-all ease-in-out duration-200 cursor-pointer">
+            <div className="py-1 px-5 flex items-center justify-between gap-2 hover:bg-primary transition-all ease-in-out duration-200 cursor-pointer">
               <a
                 href="#testimonials"
                 className="flex items-center gap-2 w-full"
               >
                 Testimonials
               </a>
-            </di>
+            </div>
           </li>
           <li className="mb-3">
-            <di className="py-1 px-5 flex items-center justify-between gap-2 hover:bg-primary transition-all ease-in-out duration-200 cursor-pointer">
+            <div className="py-1 px-5 flex items-center justify-between gap-2 hover:bg-primary transition-all ease-in-out duration-200 cursor-pointer">
               <a href="#contacts" className="flex items-center gap-2 w-full">
                 Contact
               </a>
-            </di>
+            </div>
           </li>
           <li className="mb-3">
-            <di className="py-1 px-5 flex items-center justify-between gap-2 hover:bg-primary transition-all ease-in-out duration-200 cursor-pointer">
+            <div className="py-1 px-5 flex items-center justify-between gap-2 hover:bg-primary transition-all ease-in-out duration-200 cursor-pointer">
               <a href="#footer" className="flex items-center gap-2 w-full">
                 Footer
               </a>
-            </di>
+            </div>
           </li>
         </ul>
       </nav>
