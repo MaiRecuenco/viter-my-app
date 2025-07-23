@@ -55,6 +55,45 @@
   h6 {
     @apply text-lg font-semibold;
   }
+
+  /*  */
+
+  input,
+  select {
+    @apply border-b border-l pl-2 border-solid border-gray-300 bg-transparent pt-2 w-full rounded-sm h-[40px] truncate;
+  }
+  textarea {
+    @apply block w-full border-l pl-2 pt-2 border-b border-gray-300 border-solid h-28;
+  }
+  input.error-show,
+  textarea.error-show,
+  select.error-show {
+    @apply border border-red-500 animate-shake;
+  }
+
+  input:disabled,
+  select:disabled,
+  textarea:disabled,
+  :disabled {
+    @apply bg-gray-100 border-gray-200 cursor-not-allowed hover:bg-gray-100 hover:text-inherit hover:border-gray-200;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    @apply border-b border-solid border-accent outline-0;
+  }
+  input.account_password {
+    @apply !border-0 !border-b !rounded-none focus:!border-t-0 focus:!border-r-0 focus:!border-l-0;
+  }
+
+  label {
+    @apply absolute z-10 text-xs transform translate-x-2 -translate-y-6 bg-transparent top-4 text-dark;
+  }
+
+  span.error-show {
+    @apply text-[9px] text-red-600 w-full absolute -bottom-3.5 right-0;
+  }
 }
 @layer components {
   .page-container {
@@ -140,5 +179,30 @@
   form input,
   form textarea {
     @apply w-full px-4 py-3 border border-black/30 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-2 focus:outline-blue-500 mt-3 mb-6;
+  }
+
+  /* MAKE LAST BACKDROP TO SHOW BG OVERLAY */
+  .modal__wrapper,
+  .backdrop:last-of-type {
+    @apply last-of-type:bg-black/30;
+  }
+  .modal-wrapper {
+    @apply bg-white h-full flex flex-col max-w-[400px] w-full p-5;
+  }
+  .modal-wrapper-menu {
+    @apply bg-white h-full flex flex-col max-w-[506px] w-full p-5;
+  }
+
+  .btn-modal-submit {
+    @apply flex items-center justify-center !text-white gap-2 px-3 py-1.5 bg-accent rounded-md border-accent border hover:bg-accent hover:border-accent duration-300 ease-in w-full;
+  }
+  .btn-modal-submit:disabled {
+    @apply opacity-50;
+  }
+  .btn-modal-cancel {
+    @apply flex items-center justify-center text-dark gap-2 px-3 py-1.5 bg-white rounded-md border-gray-300 border w-full;
+  }
+  .btn-modal-cancel:disabled {
+    @apply opacity-50 hover:bg-white hover:text-dark hover:border-gray-300;
   }
 }

@@ -9,7 +9,7 @@ $webServices = new WebServices($conn);
 //     $webServices->
 // }
 
-if(empty($_GET)){
+if (empty($_GET)) {
     $query = checkReadAll($webServices);
     http_response_code(200);
     getQueriedData($query);

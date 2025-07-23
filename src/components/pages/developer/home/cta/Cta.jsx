@@ -3,7 +3,7 @@ import React from "react";
 const Cta = () => {
   return (
     <>
-      <section id="contacts" className="bg-white py-12 md:py-20">
+      <section id="contacts" className="contact bg-white py-12 md:py-20">
         <div className="container">
           <h2 className="title text-center">Get In Touch</h2>
           <div className="flex flex-col gap-10 mt-12 md:flex-row">
