@@ -118,7 +118,7 @@ function getQueriedData($query)
 
 function checkQuery($query, $msg)
 {
-    //IF QUERY IA FALSE THEN DO THIS CODE
+    //IF QUERY IS FALSE THEN DO THIS CODE
     if (!$query) {
         $response = new Response();
         $data = [];

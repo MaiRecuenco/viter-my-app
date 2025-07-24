@@ -2,11 +2,18 @@ import React, { useState } from "react";
 import { apiVersion } from "../../../../helpers/function-general";
 import ModalAddHeader from "./ModalAddHeader";
 import useQueryData from "../../../../custom-hooks/useQueryData";
-import { FaPen, FaPlus } from "react-icons/fa";
+import { HiPencil } from "react-icons/hi";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isModalHeader, setIsModalHeader] = React.useState(false);
+  const [
+    isModalHeader, //getter = get data
+    setIsModalHeader, //setter = set data
+  ] = React.useState(false);
+
+  const handleAdd = () => {
+    setIsModalHeader(true);
+  };
 
   const {
     isLoading,
@@ -19,9 +26,6 @@ const Header = () => {
     "web-services"
   );
 
-  const handleAdd = () => {
-    setIsModalHeader(true);
-  };
   return (
     <>
       <header id="header" className="bg-white shadow-md relative w-full">
@@ -34,7 +38,7 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <div className="relative ">
-            <nav className="hidden md:flex space-x-6">
+            <nav className="hidden md:flex space-x-6 items-center">
               <a href="#" className="hover:text-primary">
                 Home
               </a>
@@ -47,16 +51,18 @@ const Header = () => {
               <a href="#contacts" className="hover:text-primary">
                 Contact
               </a>
-              <div className="flex items-center gap-x-3">
-                <button
-                  className="flex items-center gap-2 hover:underline hover:text-primary"
-                  type="button"
-                  onClick={handleAdd}
-                >
-                  <FaPen className="size-6 bg-primary rounded-full text-white object-fit p-1" />
-                  Add
-                </button>
-              </div>
+              <button
+                className="tooltip"
+                data-tooltip="Add"
+                type="button"
+                //onClick={() => handleAdd(data, values)} //other syntax
+                onClick={handleAdd}
+              >
+                <HiPencil
+                  className="bg-primary text-white size-6 p-1 border 
+                transition-all ease-in-out duration-200 rounded-full "
+                />
+              </button>
             </nav>
             {/* <div className="absolute right-0 top-1/3"></div> */}
           </div>

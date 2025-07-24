@@ -1,5 +1,9 @@
 export const devApiUrl = "http://localhost/react-vite/viter-my-app/rest";
+//devApiUrl
+//http://localhost = C:\xampp\htdocs
 export const devBaseUrl = "http://localhost/react-vite/viter-my-app";
+//devBaseUrl
+
 export const apiVersion = "/v1";
 
 
