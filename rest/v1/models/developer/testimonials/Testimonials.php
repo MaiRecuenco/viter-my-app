@@ -27,7 +27,7 @@ class Testimonials
         try {
             $sql = "select ";
             $sql .= "* ";
-            $sql .= "from";
+            $sql .= "from ";
             $sql .= "{$this->tblTestimonials} ";
             $query = $this->connection->query($sql);
         } catch (PDOException $ex) {

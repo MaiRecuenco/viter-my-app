@@ -120,12 +120,13 @@ const Testimonials = () => {
 
             {/* Dots Indicator */}
             <div className="flex justify-center mt-6 space-x-2">
-              {[0, 1, 2].map((index) => (
+              {/* {[0, 1, 2].map((index) => ( */}
+              {dataTestimonials?.data.map((item, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentSlide(index)}
+                  onClick={() => setCurrentSlide(index - 1)}
                   className={`w-3 h-3 rounded-full ${
-                    currentSlide === index ? "bg-blue-600" : "bg-gray-300"
+                    currentSlide === index - 1 ? "bg-blue-600" : "bg-gray-300"
                   }`}
                 />
               ))}
