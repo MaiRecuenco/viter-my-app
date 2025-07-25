@@ -70,8 +70,36 @@ class WebServices
             ]);
             $this->lastInsertedId = $this->connection->lastInsertId();
         } catch (Exception $ex) {
-            returnError($ex);
+            // returnError($ex);
 
+            $query = false;
+        }
+        return $query;
+    }
+
+    // update 13 - add checkUpdate func
+    public function update()
+    {
+        try {
+            $sql = "update {$this->tblWebServices} set ";
+            $sql .= "web_services_name = :web_services_name, ";
+            $sql .= "web_services_description = :web_services_description, ";
+            $sql .= "web_services_image = :web_services_image, ";
+            $sql .= "web_services_link = :web_services_link, ";
+            $sql .= "web_services_text_url = :web_services_text_url, ";
+            $sql .= "web_services_updated = :web_services_updated ";
+            $sql .= "where web_services_aid = :web_services_aid ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "web_services_name" => $this->web_services_name,
+                "web_services_description" => $this->web_services_description,
+                "web_services_image" => $this->web_services_image,
+                "web_services_link" => $this->web_services_link,
+                "web_services_text_url" => $this->web_services_text_url,
+                "web_services_updated" => $this->web_services_updated,
+                "web_services_aid" => $this->web_services_aid,
+            ]);
+        } catch (PDOException $ex) {
             $query = false;
         }
         return $query;

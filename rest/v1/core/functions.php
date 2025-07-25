@@ -97,6 +97,14 @@ function checkCreate($models)
     return $query;
 }
 
+// update 12 - add checkUpdate func (next->models-dev-web-sevices-WebServices.php)
+function checkUpdate($models)
+{
+    $query = $models->update();
+    checkQuery($query, "There's something wrong with models. (update)");
+    return $query;
+}
+
 function getResultData($query)
 {
     $data = $query->fetchAll();

@@ -10,7 +10,7 @@ const CardTestimonial = ({ item }) => {
         <div className="bg-white p-8 rounded-xl shadow-md text-center">
           <img
             src={item.testimonials_image}
-            alt={item.testimonials_image}
+            alt={item.testimonials_name}
             className="w-20 h-20 rounded-full mx-auto mb-4 object-cover "
           />
           <p className="text-gray italic mb-4">{item.testimonials_text}</p>
