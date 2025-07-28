@@ -31,4 +31,13 @@ if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
         sendResponse($result);
         exit;
     }
+
+    //delete 5 = REMOVE A ROW next(->delete.php)
+    if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+        //returnError('delete')
+        $result = require 'delete.php';
+        sendResponse($result);
+        exit;
+        // returnError('asd');
+    }
 }

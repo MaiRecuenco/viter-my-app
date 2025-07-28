@@ -104,4 +104,20 @@ class WebServices
         }
         return $query;
     }
+
+    //delete 9 
+    public function delete()
+    {
+        try {
+            $sql = "delete from {$this->tblWebServices} ";
+            $sql .= "where web_services_aid = :web_services_aid ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "web_services_aid" => $this->web_services_aid
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
 }

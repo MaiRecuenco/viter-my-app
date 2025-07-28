@@ -71,4 +71,30 @@ class Testimonials
         }
         return $query;
     }
+
+    public function update()
+    {
+        try {
+            $sql = "update {$this->tblTestimonials} set ";
+            $sql .= "testimonials_name = :testimonials_name, ";
+            $sql .= "testimonials_position = :testimonials_position, ";
+            $sql .= "testimonials_text = :testimonials_text, ";
+            $sql .= "testimonials_image = :testimonials_image, ";
+            $sql .= "testimonials_updated = :testimonials_updated ";
+            $sql .= "testimonials_aid = :testimonials_aid ";
+
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "testimonials_name" => $this->testimonials_name,
+                "testimonials_position" => $this->testimonials_position,
+                "testimonials_text" => $this->testimonials_text,
+                "testimonials_image" => $this->testimonials_image,
+                "testimonials_updated" => $this->testimonials_updated,
+                "testimonials_aid" => $this->testimonials_aid,
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
 }

@@ -20,4 +20,20 @@ if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
         sendResponse($result);
         exit;
     }
+
+    //PUT - UPDATE
+    if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
+        // returnError('update');
+        $result = require 'update.php';
+        sendResponse($result);
+        exit;
+    } 
+
+    if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+        //returnError('delete')
+        $result = require 'delete.php';
+        sendResponse($result);
+        exit;
+        // returnError('asd');
+    }
 }

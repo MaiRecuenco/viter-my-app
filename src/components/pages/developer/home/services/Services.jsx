@@ -2,14 +2,21 @@ import React from "react";
 import CardService from "../../../../partials/CardService";
 import { apiVersion } from "../../../../helpers/function-general";
 import useQueryData from "../../../../custom-hooks/useQueryData";
-import { FaPlus } from "react-icons/fa";
+import { FaList, FaPlus, FaTable, FaTrash } from "react-icons/fa";
 import ModalAddServices from "./ModalAddServices";
 import { FaPencil } from "react-icons/fa6";
+import ModalDeleteServices from "./ModalDeleteServices";
+import ServicesList from "./ServicesList";
+import ServicesTable from "./ServicesTable";
 
 const Services = () => {
   const [isModalServices, setIsModalServices] = React.useState(false);
+  //delete 1
+  const [isDeleteServices, setIsDeleteServices] = React.useState(false);
   //update 3
   const [itemEdit, setItemEdit] = React.useState();
+  //delete 8
+  const [isTable, setIsTable] = React.useState(false);
 
   const {
     isLoading,
@@ -22,14 +29,25 @@ const Services = () => {
     "web-services"
   );
 
+  console.log(isTable);
+  //delete 9
+  const handleToggleTable = () => {
+    setIsTable(!isTable);
+  };
   const handleAdd = () => {
     setItemEdit(null); // update 8
     setIsModalServices(true);
   };
 
+  //delete 2 (next->create 'ModalDeleteServices.jsx in services folder)
+  const handleDelete = (item) => {
+    setItemEdit(item);
+    setIsDeleteServices(true);
+  };
+
   // update 2 - function to handle the edit
   const handleEdit = (item) => {
-    setItemEdit(item); 
+    setItemEdit(item);
     setIsModalServices(true);
   };
   return (
@@ -48,6 +66,24 @@ const Services = () => {
                 <button
                   className="flex items-center gap-2 hover:underline hover:text-primary"
                   type="button"
+                  onClick={handleToggleTable}
+                  //delete 7
+                >
+                  {isTable == true ? (
+                    <>
+                      <FaList className="size-3" />
+                      List
+                    </>
+                  ) : (
+                    <>
+                      <FaTable className="size-3" />
+                      Table
+                    </>
+                  )}
+                </button>
+                <button
+                  className="flex items-center gap-2 hover:underline hover:text-primary"
+                  type="button"
                   onClick={handleAdd}
                 >
                   <FaPlus className="size-3" />
@@ -56,66 +92,45 @@ const Services = () => {
               </div>
             </div>
           </div>
-
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
-            {dataServices?.data.map((item, key) => {
-              return (
-                // update 1 - create button
-                <div className="relative" key={key}>
-                  <div className="absolute top-5 right-3">
-                    <button
-                      type="button"
-                      data-tooltip="Edit"
-                      className="text-white tooltip"
-                      onClick={() => handleEdit(item)}
-                    >
-                      <FaPencil className="p-1 bg-primary rounded-full" />
-                    </button>
-                  </div>
-                  <CardService item={item} />
-                </div>
-              );
-            })}
-
-            {/* Card Service */}
-            {/* <CardService
-              id={"web-development"}
-              image={"../images/card-icon-web-development.webp"}
-              title={"Web Development"}
-              alt={"Web Development Image"}
-              description={
-                "Custom websites build with modern frameworks like Next.js and React for optimal performance."
-              }
-              link={"View Packages"}
+          {/* 3-column grid */}
+          {/* DELETE */}
+          {isTable == true ? (
+            <>
+              <ServicesTable
+                isLoading={isLoading}
+                isFetching={isFetching}
+                error={error}
+                dataServices={dataServices}
+                handleAdd={handleAdd}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
+            </>
+          ) : (
+            <ServicesList
+              isLoading={isLoading}
+              isFetching={isFetching}
+              error={error}
+              dataServices={dataServices}
+              handleAdd={handleAdd}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
             />
-            <CardService
-              id={"ui-ux-design"}
-              image={"../images/card-icon-ui-ux-design.webp"}
-              title={"UI/UX Design"}
-              alt={"UI/UX Design Image"}
-              description={
-                "Beautiful interfaces designed to convert visitors with strategic user experience flows."
-              }
-              link={"See Portfolio"}
-            />
-            <CardService
-              id={"seo-optimization"}
-              name={"card"}
-              image={"../images/card-icon-seo-optimization.webp"}
-              title={"SEO Optimization"}
-              alt={"SEO Optimization Image"}
-              description={
-                "Increase your visibility on search engines with our data-driven SEO strategies."
-              }
-              link={"View Packages"}
-            /> */}
-          </div>
+          )}
         </div>
       </section>
-
       {/* update 4 - add itemEdit={itemEdit} then go to ModalAddServices*/}
       {isModalServices && (
         <ModalAddServices setIsModal={setIsModalServices} itemEdit={itemEdit} />
+      )}
+      {/* delete 4 next(->controllers->dev->web-services->web-services.php)*/}
+      {isDeleteServices && (
+        <ModalDeleteServices
+          setModalDelete={setIsDeleteServices}
+          mySqlEndpoint={`${apiVersion}/controllers/developer/web-services/web-services.php?id=${itemEdit.web_services_aid}
+       `}
+          queryKey="web-services"
+        />
       )}
     </>
   );

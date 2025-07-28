@@ -30,16 +30,16 @@ const ModalAddServices = ({ setIsModal, itemEdit }) => {
       queryClient.invalidateQueries({ queryKey: ["web-services"] }); // give id for refetching data.
 
       if (!data.success) {
-        window.prompt(data.error);
+        alert(data.error);
       } else {
-        window.prompt(`Successfully created.`);
+        alert(`Successfully created.`);
         setIsModal(false);
       }
     },
   });
 
   const handleClose = () => {
-    if (mutation.isPending) return; // dont closer while query is ongoing
+    if (mutation.isPending) return; // dont close while query is ongoing
     setAnimate("translate-x-full"); //animate close of modal
     setTimeout(() => {
       setIsModal(false); //close upon animation exit
