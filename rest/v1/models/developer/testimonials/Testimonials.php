@@ -64,7 +64,7 @@ class Testimonials
                 "testimonials_created" => $this->testimonials_created,
                 "testimonials_updated" => $this->testimonials_updated,
             ]);
-        } catch (PDOException $ex) {
+        } catch (Exception $ex) {
             returnError($ex);
 
             $query = false;
@@ -81,7 +81,7 @@ class Testimonials
             $sql .= "testimonials_text = :testimonials_text, ";
             $sql .= "testimonials_image = :testimonials_image, ";
             $sql .= "testimonials_updated = :testimonials_updated ";
-            $sql .= "testimonials_aid = :testimonials_aid ";
+            $sql .= "where testimonials_aid = :testimonials_aid ";
 
             $query = $this->connection->prepare($sql);
             $query->execute([
@@ -91,6 +91,21 @@ class Testimonials
                 "testimonials_image" => $this->testimonials_image,
                 "testimonials_updated" => $this->testimonials_updated,
                 "testimonials_aid" => $this->testimonials_aid,
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    public function delete()
+    {
+        try {
+            $sql = "delete from {$this->tblTestimonials} ";
+            $sql .= "where testimonials_aid = :testimonials_aid ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "testimonials_aid" => $this->testimonials_aid
             ]);
         } catch (PDOException $ex) {
             $query = false;

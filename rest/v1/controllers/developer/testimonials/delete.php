@@ -3,7 +3,7 @@
 $conn =  null;
 $conn = checkDatabaseConnection();
 //use model
-$webServices = new WebServices($conn);
+$testimonials = new Testimonials($conn);
 
 if (array_key_exists('id', $_GET)) {
     $testimonials->testimonials_aid = $_GET['id'];

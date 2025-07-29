@@ -5,9 +5,9 @@ const CardTestimonial = ({ item }) => {
     <>
       <div
         id={item.testimonials_aid}
-        className="card w-full flex shrink-0 px-4"
+        className="testimonial w-full flex shrink-0 px-4"
       >
-        <div className="bg-white p-8 rounded-xl shadow-md text-center">
+        <div className="bg-white p-8 rounded-xl shadow-md text-center w-full">
           <img
             src={item.testimonials_image}
             alt={item.testimonials_name}

@@ -14,6 +14,28 @@ const TestimonialsList = ({
   handleDelete,
 }) => {
   const [currentSlide, setCurrentSlide] = React.useState(0);
+  const prevTestimonialCountRef = React.useRef(0);
+  const hasInitializedRef = React.useRef(false);
+
+  React.useEffect(() => {
+    const testimonials = dataTestimonials?.data ?? [];
+    const testimonialCount = testimonials.length;
+    const prevCount = prevTestimonialCountRef.current;
+
+    // First time we get non-empty data (on load or refresh)
+    if (!hasInitializedRef.current && testimonialCount > 0) {
+      setCurrentSlide(0); // Always go to first slide on initial load
+      hasInitializedRef.current = true;
+    } else if (testimonialCount > prevCount) {
+      setCurrentSlide(testimonialCount - 1); // New testimonial added
+    } else if (testimonialCount < prevCount) {
+      setCurrentSlide((prev) => Math.max(prev - 1, 0)); // Testimonial removed
+    } else if (testimonialCount === 0) {
+      setCurrentSlide(0); // No testimonials
+    }
+
+    prevTestimonialCountRef.current = testimonialCount;
+  }, [dataTestimonials?.data]);
   return (
     <>
       <div className="relative max-w-4xl mx-auto">
@@ -26,7 +48,7 @@ const TestimonialsList = ({
               return (
                 <React.Fragment key={key}>
                   <div className="relative">
-                    <div className="absolute flex right-8 top-10">
+                    <div className="absolute flex left-[24rem] sm:left-[32rem] md:left-[40rem] lg:left-[52.2rem] top-9">
                       <button // 1ST STEP
                         type="button"
                         data-tooltip="Edit"
@@ -107,6 +129,12 @@ const TestimonialsList = ({
         >
           <HiOutlineChevronRight className="w-6 h-6 text-gray-600" />
         </button>
+
+        {dataTestimonials?.data?.length === 0 && (
+          <div className="text-center py-8 text-gray-500">
+            No testimonials available.
+          </div>
+        )}
 
         {/* Dots Indicator */}
         <div className="flex justify-center mt-6 space-x-2">

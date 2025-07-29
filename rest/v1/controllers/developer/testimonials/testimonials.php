@@ -27,7 +27,7 @@ if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
         $result = require 'update.php';
         sendResponse($result);
         exit;
-    } 
+    }
 
     if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
         //returnError('delete')

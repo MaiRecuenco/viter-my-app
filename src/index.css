@@ -155,7 +155,10 @@
     @apply border border-gray-700 hover:bg-gray-100;
   }
   .card {
-    @apply bg-white p-8 rounded-xl shadow-md hover:shadow-lg;
+    @apply bg-white p-8 rounded-xl shadow-md hover:shadow-lg w-full h-full;
+  }
+  .testimonial {
+    @apply p-10 hover:shadow-lg;
   }
   .card img {
     @apply size-16 mb-6;

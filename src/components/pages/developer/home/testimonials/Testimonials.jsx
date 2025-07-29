@@ -10,7 +10,7 @@ import TestimonialsList from "./TestimonialsList";
 const Testimonials = () => {
   // const [currentSlide, setCurrentSlide] = React.useState(0);
   const [isModalTestimonials, setIsModalTestimonials] = React.useState(false);
-  const [isDeleteServices, setIsDeleteServices] = React.useState(false);
+  const [isDeleteTestimonials, setIsDeleteTestimonials] = React.useState(false);
   const [isTable, setIsTable] = React.useState(false);
   const [itemEdit, setItemEdit] = React.useState();
 
@@ -21,7 +21,7 @@ const Testimonials = () => {
 
   const handleDelete = (item) => {
     setItemEdit(item);
-    setIsDeleteServices(true);
+    setIsDeleteTestimonials(true);
   };
 
   const handleAdd = () => {
@@ -117,12 +117,12 @@ const Testimonials = () => {
         />
       )}
 
-      {isDeleteServices && (
+      {isDeleteTestimonials && (
         <ModalDeleteTestimonials
-          setModalDelete={setIsDeleteServices}
-          mySqlEndpoint={`${apiVersion}/controllers/developer/web-services/web-services.php?id=${itemEdit.testimonials_aid}
+          setModalDelete={setIsDeleteTestimonials}
+          mySqlEndpoint={`${apiVersion}/controllers/developer/testimonials/testimonials.php?id=${itemEdit.testimonials_aid}
         `}
-          query="testimonials"
+          queryKey="testimonials"
         />
       )}
     </>

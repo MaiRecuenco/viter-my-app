@@ -17,7 +17,9 @@ const TestimonialsTable = ({
         <thead>
           <th>#</th>
           <th>Name</th>
-          <th>Description</th>
+          <th>Position</th>
+          <th>Testimonial</th>
+          <th>Image</th>
           <th>Action</th>
         </thead>
         <tbody>
@@ -29,7 +31,14 @@ const TestimonialsTable = ({
                 <td>{item.testimonials_position}</td>
                 <td>{item.testimonials_text}</td>
                 <td>
-                  <div className="flex items-center justify-end mr-5 gap-x-3">
+                  <img
+                    src={item.testimonials_image}
+                    alt={item.testimonials_name}
+                    className="rounded-full size-14 object-cover"
+                  />
+                </td>
+                <td>
+                  <div className="flex items-center mr-5  gap-x-3">
                     <button // 1ST STEP
                       type="button"
                       data-tooltip="Edit"

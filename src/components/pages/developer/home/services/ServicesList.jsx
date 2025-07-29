@@ -18,7 +18,7 @@ const ServicesList = ({
         {dataServices?.data.map((item, key) => {
           return (
             <div key={key} className="relative">
-              <div className="absolute">
+              <div className="absolute top-5 right-5">
                 <button // 1ST STEP
                   type="button"
                   data-tooltip="Edit"
