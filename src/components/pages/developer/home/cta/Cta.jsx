@@ -8,18 +8,31 @@ import { queryData } from "../../../../custom-hooks/queryData";
 import { FaList, FaTable } from "react-icons/fa";
 
 const Cta = () => {
-  // const [isAdd, setIsAdd] = React.useState(false);
+  const [isAdd, setIsAdd] = React.useState(false);
   const queryClient = useQueryClient();
   const [isTable, setIsTable] = React.useState(false);
+  const [isDeleteContact, setIsDeleteContact] = React.useState(false);
+  const [itemEdit, setItemEdit] = React.useState();
 
   console.log(isTable);
   const handleToggleTable = () => {
     setIsTable(!isTable);
   };
-  // const handleAdd = () => {
-  //   // setItemEdit(null);
-  //   setIsAdd(true);
-  // };
+
+  const handleDelete = (item) => {
+    setItemEdit(item);
+    setIsDeleteContact(true);
+  };
+
+  const handleAdd = () => {
+    setItemEdit(null);
+    setIsAdd(true);
+  };
+
+  const handleEdit = (item) => {
+    setItemEdit(item);
+    setIsAdd(true);
+  };
 
   const mutation = useMutation({
     mutationFn: (values) =>
@@ -45,16 +58,16 @@ const Cta = () => {
     contact_message: "",
   };
 
-  // const {
-  //   isLoading,
-  //   isFetching,
-  //   error,
-  //   data: dataContact,
-  // } = useQueryData(
-  //   `${apiVersion}/controllers/developer/contact/contact.php`,
-  //   "get",
-  //   "contact"
-  // );
+  const {
+    isLoading,
+    isFetching,
+    error,
+    data: dataContact,
+  } = useQueryData(
+    `${apiVersion}/controllers/developer/contact/contact.php`,
+    "get",
+    "contact"
+  );
 
   const yupSchema = Yup.object({
     contact_fullname: Yup.string().required("required"),
@@ -177,11 +190,27 @@ const Cta = () => {
                 resetForm();
               }}
             >
-            
               {(props) => {
                 return (
                   <Form className="contact bg-gray-50 rounded-xl p-8 h-fit md:w-1/2">
                     {/* Forms */}
+                    <button
+                      className="flex items-center gap-2 hover:underline hover:text-primary mb-5 justify-self-end"
+                      type="button"
+                      onClick={handleToggleTable}
+                    >
+                      {isTable == true ? (
+                        <>
+                          <FaList className="size-3" />
+                          List
+                        </>
+                      ) : (
+                        <>
+                          <FaTable className="size-3" />
+                          Table
+                        </>
+                      )}
+                    </button>
                     <div>
                       <div className="relative">
                         <InputText
