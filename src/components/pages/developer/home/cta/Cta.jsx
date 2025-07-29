@@ -6,6 +6,9 @@ import { InputText, InputTextArea } from "../../../../helpers/FormInputs";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { queryData } from "../../../../custom-hooks/queryData";
 import { FaList, FaTable } from "react-icons/fa";
+import ContactList from "./ContactList";
+import ContactTable from "./ContactTable";
+import ModalDeleteContact from "./ModalDeleteContact";
 
 const Cta = () => {
   const [isAdd, setIsAdd] = React.useState(false);
@@ -265,9 +268,40 @@ const Cta = () => {
             </Formik>
           </div>
         </div>
+        {isTable == true ? (
+          <>
+            <ContactTable
+              isLoading={isLoading}
+              isFetching={isFetching}
+              error={error}
+              dataTestimonials={dataTestimonials}
+              handleAdd={handleAdd}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+            />
+          </>
+        ) : (
+          <ContactList
+            isLoading={isLoading}
+            isFetching={isFetching}
+            error={error}
+            dataTestimonials={dataTestimonials}
+            handleAdd={handleAdd}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+          />
+        )}
       </section>
 
-      {/* {isAdd && <AddContact setIsAdd={setIsAdd} />} */}
+      {isAdd && <AddContact setIsAdd={setIsAdd} itemEdit={itemEdit} />}
+
+      {isDeleteContact && (
+        <ModalDeleteContact
+          setModalDelete={setIsDeleteContact}
+          mySqlEndpoint={`{apiVersion}/controllers/developer/contact/contact.php?id=${itemEdit.contact_aid}`}
+          queryKey="contact"
+        />
+      )}
     </>
   );
 };
