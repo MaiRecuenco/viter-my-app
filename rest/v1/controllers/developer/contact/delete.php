@@ -5,7 +5,7 @@ $conn = checkDatabaseConnection();
 
 $contact = new Contact($conn);
 
-if (array_key_existsp('id', $_GET)) {
+if (array_key_exists('id', $_GET)) {
   $contact->contact_aid = $_GET['id'];
 
   checkId($contact->contact_aid);
@@ -15,4 +15,3 @@ if (array_key_existsp('id', $_GET)) {
 }
 
 checkEndpoint();
-

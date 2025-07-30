@@ -95,6 +95,10 @@
     @apply text-[9px] text-red-600  absolute -bottom-6 right-0;
   }
 
+  .contact span.error-show {
+    @apply text-[9px] text-red-600 absolute -bottom-0 right-0;
+  }
+
   table {
     @apply border-collapse border-spacing-2 text-left w-full table-auto;
   }

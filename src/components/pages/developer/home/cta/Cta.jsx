@@ -9,6 +9,8 @@ import { FaList, FaTable } from "react-icons/fa";
 import ContactList from "./ContactList";
 import ContactTable from "./ContactTable";
 import ModalDeleteContact from "./ModalDeleteContact";
+import useQueryData from "../../../../custom-hooks/useQueryData";
+import ModalAddContact from "./ModalAddContact";
 
 const Cta = () => {
   const [isAdd, setIsAdd] = React.useState(false);
@@ -180,125 +182,113 @@ const Cta = () => {
                 </li>
               </ul>
             </div>
-            <Formik
-              initialValues={initVal}
-              validationSchema={yupSchema}
-              // onSubmit={async (values, { setSubmitting, resetForm }) => {
-              //   console.log(values);
-              //   mutation.mutate(values);
-              // }}
-              onSubmit={async (values, { resetForm }) => {
-                console.log;
-                await mutation.mutateAsync(values);
-                resetForm();
-              }}
-            >
-              {(props) => {
-                return (
-                  <Form className="contact bg-gray-50 rounded-xl p-8 h-fit md:w-1/2">
-                    {/* Forms */}
-                    <button
-                      className="flex items-center gap-2 hover:underline hover:text-primary mb-5 justify-self-end"
-                      type="button"
-                      onClick={handleToggleTable}
-                    >
-                      {isTable == true ? (
-                        <>
-                          <FaList className="size-3" />
-                          List
-                        </>
-                      ) : (
-                        <>
-                          <FaTable className="size-3" />
-                          Table
-                        </>
-                      )}
-                    </button>
-                    <div>
-                      <div className="relative">
-                        <InputText
-                          label="Full Name"
-                          name="contact_fullname"
-                          type="text"
-                        />
+            <div className="md:w-1/2">
+              {isTable ? (
+                <div className="contact bg-gray-50 rounded-xl p-8">
+                  <button
+                    className="flex items-center gap-2 hover:underline hover:text-primary mb-5 justify-self-end"
+                    type="button"
+                    onClick={handleToggleTable}
+                  >
+                    <FaList className="size-3" />
+                    List
+                  </button>
+                  <ContactTable
+                    isLoading={isLoading}
+                    isFetching={isFetching}
+                    error={error}
+                    dataContact={dataContact}
+                    handleAdd={handleAdd}
+                    handleEdit={handleEdit}
+                    handleDelete={handleDelete}
+                  />
+                </div>
+              ) : (
+                <Formik
+                  initialValues={initVal}
+                  validationSchema={yupSchema}
+                  onSubmit={async (values, { resetForm }) => {
+                    mutation.mutate(values);
+                    resetForm();
+                  }}
+                >
+                  {(props) => (
+                    <Form className="contact bg-gray-50 rounded-xl p-8">
+                      <button
+                        className="flex items-center gap-2 hover:underline hover:text-primary mb-5 justify-self-end"
+                        type="button"
+                        onClick={handleToggleTable}
+                      >
+                        <FaTable className="size-3" />
+                        Table
+                      </button>
+                      <div>
+                        <div className="relative">
+                          <InputText
+                            label="Full Name"
+                            name="contact_fullname"
+                            type="text"
+                          />
+                        </div>
+                        <div className="relative">
+                          <InputText
+                            label="Email Address"
+                            name="contact_email"
+                            type="text"
+                          />
+                        </div>
+                        <div className="relative">
+                          <InputTextArea
+                            label="Your Message"
+                            name="contact_message"
+                            type="text"
+                            className="inline-block"
+                          />
+                        </div>
                       </div>
-                      <div className="relative">
-                        <InputText
-                          label="Email Address"
-                          name="contact_email"
-                          type="text"
-                        />
-                      </div>
-                      <div className="relative">
-                        <InputTextArea
-                          label="Your Message"
-                          name="contact_message"
-                          type="text"
-                          className="inline-block"
-                        />
-                      </div>
-                    </div>
-                    {/* Actions */}
-                    <button
-                      type="submit"
-                      // disabled={mutation.isPending}
-                      className="btn btn--blue w-full"
-                    >
-                      {/* {mutation.isPending ? "Loading..." : "Send Message"} */}
-                      Send Message
-                    </button>
-                  </Form>
-                );
-              }}
-              {/*  <form className="contact bg-gray-50 rounded-xl p-8 h-fit md:w-1/2">
-                          <div className="relative">
-                            <label>Full Name</label>
-                            <input type="text" />
-                          </div>
-                          <div className="relative">
-                            <label>Email Address</label>
-                            <input type="text" />
-                          </div>
-                          <div className="relative">
-                            <label className="top-1">Your Message</label>
-                            <textarea rows="4"></textarea>
-                          </div>
-                          <button className="btn btn--blue w-full">Send Message</button>
-                        </form> */}
-            </Formik>
+                      <button type="submit" className="btn btn--blue w-full">
+                        Send Message
+                      </button>
+                    </Form>
+                  )}
+                </Formik>
+              )}
+            </div>
           </div>
         </div>
-        {isTable == true ? (
+        {/* {isTable ? (
           <>
             <ContactTable
               isLoading={isLoading}
               isFetching={isFetching}
               error={error}
-              dataTestimonials={dataTestimonials}
+              dataContact={dataContact}
               handleAdd={handleAdd}
               handleEdit={handleEdit}
               handleDelete={handleDelete}
             />
           </>
         ) : (
-          <ContactList
-            isLoading={isLoading}
-            isFetching={isFetching}
-            error={error}
-            dataTestimonials={dataTestimonials}
-            handleAdd={handleAdd}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-          />
-        )}
+          <div className="w-full flex justify-cneter mt-8">
+            <ContactList
+              isLoading={isLoading}
+              isFetching={isFetching}
+              error={error}
+              dataContact={dataContact}
+              handleAdd={handleAdd}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+            />
+          </div>
+        )} */}
       </section>
 
-      {isAdd && <AddContact setIsAdd={setIsAdd} itemEdit={itemEdit} />}
+      {isAdd && <ModalAddContact setIsAdd={setIsAdd} itemEdit={itemEdit} />}
 
       {isDeleteContact && (
         <ModalDeleteContact
           setModalDelete={setIsDeleteContact}
-          mySqlEndpoint={`{apiVersion}/controllers/developer/contact/contact.php?id=${itemEdit.contact_aid}`}
+          mySqlEndpoint={`${apiVersion}/controllers/developer/contact/contact.php?id=${itemEdit.contact_aid}`}
           queryKey="contact"
         />
       )}

@@ -35,6 +35,8 @@ const ModalAddHeader = ({ setIsModal, itemEdit }) => {
   const initVal = {
     header_name: itemEdit ? itemEdit.header_name : "",
     header_link: itemEdit ? itemEdit.header_link : "",
+
+    header_name_old: itemEdit ? itemEdit.header_name : "",
   };
 
   const yupSchema = Yup.object({

@@ -19,6 +19,12 @@ if (array_key_exists('id', $_GET)) {
     $webServices->web_services_text_url = $data['web_services_text_url'];
     $webServices->web_services_updated = date("Y-m-d H:i:s");
 
+
+    //Validation 5 next->src->ModalAddServices.jsx
+    $web_services_name_old = $data['web_services_name_old'];
+
+    compareName($webServices, $web_services_name_old, $webServices->web_services_name);
+
     $query = checkUpdate($webServices); // update 12 - add checkUpdate func in core -- functions.php--
     returnSuccess($webServices, 'webservices update', $query);
 }

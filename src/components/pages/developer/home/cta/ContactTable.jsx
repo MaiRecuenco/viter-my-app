@@ -13,25 +13,27 @@ const ContactTable = ({
 }) => {
   return (
     <>
-      <table>
-        <thead>
-          <th>#</th>
-          <th>Full Name</th>
-          <th>Email</th>
-          <th>Message</th>
-          <th>Action</th>
-        </thead>
-        <tbody>
-          {dataContact?.data.map((item, index) => {
-            return (
-              <tr>
-                <td>{index + 1}.</td>
-                <td>{item.contact_fullname}</td>
-                <td>{item.contact_email}</td>
-                <td>{item.contact_message}</td>
-                <td>
-                  <div className="flex items-center mr-5  gap-x-3">
-                    <button // 1ST STEP
+      <div className="md:overflow-x-auto">
+        <table className=" border border-gray-200 rounded-lg">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="px-4 py-2 text-left">#</th>
+              <th className="px-4 py-2 text-left">Full Name</th>
+              <th className="px-4 py-2 text-left">Email</th>
+              <th className="px-4 py-2 text-left">Message</th>
+              <th className="px-4 py-2 text-left">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dataContact?.data.map((item, index) => (
+              <tr key={item.contact_aid}>
+                <td className="px-4 py-2">{index + 1}.</td>
+                <td className="px-4 py-2">{item.contact_fullname}</td>
+                <td className="px-4 py-2">{item.contact_email}</td>
+                <td className="px-4 py-2">{item.contact_message}</td>
+                <td className="px-4 py-2">
+                  <div className="flex items-center gap-x-3">
+                    <button
                       type="button"
                       data-tooltip="Edit"
                       className="tooltip"
@@ -39,10 +41,10 @@ const ContactTable = ({
                     >
                       <FaPencil className="size-4" />
                     </button>
-                    <button // 1ST STEP
+                    <button
                       type="button"
                       data-tooltip="Delete"
-                      className="tooltip "
+                      className="tooltip"
                       onClick={() => handleDelete(item)}
                     >
                       <FaTrash className="size-4" />
@@ -50,10 +52,10 @@ const ContactTable = ({
                   </div>
                 </td>
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };
