@@ -12,6 +12,11 @@ class WebServices
     public $web_services_created;
     public $web_services_updated;
 
+
+    //Load 4
+    public $web_services_start;
+    public $web_services_total;
+
     public  $connection;
     public $lastInsertedId;
 
@@ -23,6 +28,8 @@ class WebServices
         $this->tblWebServices = "my_app_web_services";
     }
 
+    //Load 3 edit func 'readAll' and add func 'readLimit'
+
     public function readAll()
     {
         try {
@@ -30,7 +37,30 @@ class WebServices
             $sql .= "* ";
             $sql .= "from ";
             $sql .= "{$this->tblWebServices} ";
+            $sql .= "order by ";
+            $sql .= "web_services_name ";
             $query = $this->connection->query($sql);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+    public function readLimit()
+    {
+        try {
+            $sql = "select ";
+            $sql .= "* ";
+            $sql .= "from ";
+            $sql .= "{$this->tblWebServices} ";
+            $sql .= "order by ";
+            $sql .= "web_services_name ";
+            $sql .= "limit :start, ";
+            $sql .= ":total ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "start" => $this->web_services_start - 1,
+                "total" => $this->web_services_total,
+            ]);
         } catch (PDOException $ex) {
             $query = false;
         }
@@ -136,6 +166,4 @@ class WebServices
         }
         return $query;
     }
-
-   
 }

@@ -75,6 +75,7 @@ const ModalAddHeader = ({ setIsModal, itemEdit }) => {
           onSubmit={async (values, { setSubmitting, resetForm }) => {
             console.log(values);
             mutation.mutate(values);
+            resetForm();
           }}
         >
           {(props) => {

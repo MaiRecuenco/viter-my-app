@@ -226,6 +226,44 @@ function compareEmail($models, $email_old, $email)
     }
 }
 
+// Load 2
+function checkLimitId($start, $total)
+{
+    $response = new Response();
+    if ($start = '' || !is_numeric($start) || $total = '' || !is_numeric($total)) {
+        $response->setSuccess(false);
+        $error = [];
+        $error['code'] = '400';
+        $error['error'] = "Limit ID cannot be blank or must be numeric.";
+        $response->setData($error);
+        $response->send();
+        exit;
+    }
+}
+
+function checkReadLimit($models)
+{
+    $query = $models->readLimit();
+    checkQuery($query, "There's something wrong with your models. (readLimit)");
+    return $query;
+}
+
+function checkReadQuery($query, $total_result, $models_total, $models_start)
+{
+    $response = new Response();
+    $returnData = [];
+    $returnData['data'] = getResultData($query);
+    $returnData['count'] = $query->rowCount();
+    $returnData['total'] = $total_result->rowCount();
+    $returnData['per_page'] = $models_total;
+    $returnData['page'] = (int)$models_start;
+    $returnData['total_pages'] = ceil($total_result->rowCount() / $models_total);
+    $returnData['success'] = true;
+    $response->setData($returnData);
+    $response->send();
+    exit;
+}
+
 
 
 

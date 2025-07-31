@@ -8,6 +8,9 @@ import { FaPencil } from "react-icons/fa6";
 import ModalDeleteServices from "./ModalDeleteServices";
 import ServicesList from "./ServicesList";
 import ServicesTable from "./ServicesTable";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { queryDataInfinite } from "../../../../custom-hooks/queryDataInfinite";
+import { InView, useInView } from "react-intersection-observer";
 
 const Services = () => {
   const [isModalServices, setIsModalServices] = React.useState(false);
@@ -18,16 +21,53 @@ const Services = () => {
   //delete 8
   const [isTable, setIsTable] = React.useState(false);
 
+  const [page, setPage] = React.useState(1);
+  const { ref, Inview } = useInView();
+
+  // const {
+  //   isLoading,
+  //   isFetching: isFetchingDataServices,
+  //   error: errorDataServices,
+  //   data: dataServices,
+  // } = useQueryData(
+  //   `${apiVersion}/controllers/developer/web-services/web-services.php`,
+  //   "get",
+  //   "web-services"
+  // );
+
+  //Load 5
   const {
-    isLoading,
-    isFetching,
+    data: result,
     error,
-    data: dataServices,
-  } = useQueryData(
-    `${apiVersion}/controllers/developer/web-services/web-services.php`,
-    "get",
-    "web-services"
-  );
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery({
+    queryKey: ["web-services"],
+    queryFn: async ({ pageParam = 1 }) =>
+      await queryDataInfinite(
+        ``,
+        `${apiVersion}/controllers/developer/web-services/page.php?start=${pageParam}`, //load more and pagination functionalities
+        false,
+        {},
+        "post"
+      ),
+    getNextPageParam: (lastpage) => {
+      if (lastpage.page < lastpage.total) {
+        return lastpage.page + lastpage.count;
+      }
+      return;
+    },
+  });
+
+  React.useEffect(() => {
+    fetchNextPage();
+    if (Inview) {
+      setPage((prev) => prev + 1);
+    }
+  }, [Inview]);
 
   console.log(isTable);
   //delete 9
@@ -95,26 +135,41 @@ const Services = () => {
           {/* 3-column grid */}
           {/* DELETE */}
           {isTable == true ? (
+            //Load 6 ->next(ServicesTable.jsx)
             <>
               <ServicesTable
-                isLoading={isLoading}
-                isFetching={isFetching}
-                error={error}
-                dataServices={dataServices}
+                // isLoading={isLoading}
+                // dataServices={dataServices}
                 handleAdd={handleAdd}
                 handleEdit={handleEdit}
                 handleDelete={handleDelete}
+                result={result}
+                error={error}
+                fetchNextPage={fetchNextPage}
+                hasNextPage={hasNextPage}
+                isFetching={isFetching}
+                isFetchingNextPage={isFetchingNextPage}
+                status={status}
+                setPage={setPage}
+                page={page}
+                ref={ref}
               />
             </>
           ) : (
             <ServicesList
-              isLoading={isLoading}
-              isFetching={isFetching}
-              error={error}
-              dataServices={dataServices}
+              // isLoading={isLoading}
+              // dataServices={dataServices}
               handleAdd={handleAdd}
               handleEdit={handleEdit}
               handleDelete={handleDelete}
+              //Load 6
+              result={result}
+              error={error}
+              fetchNextPage={fetchNextPage}
+              hasNextPage={hasNextPage}
+              isFetching={isFetching}
+              isFetchingNextPage={isFetchingNextPage}
+              status={status}
             />
           )}
         </div>
